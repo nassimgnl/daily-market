@@ -1,0 +1,23 @@
+<h3>Geopolitics</h3>
+<ul>
+{% for item in news.geopolitics %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+
+<h2>📊 Markets</h2>
+<ul>
+{% for k,v in markets.items() %}
+<li>{{ k }}: {{ v }}%</li>
+{% endfor %}
+</ul>
+
+<h2>₿ Crypto</h2>
+<ul>
+{% for k,v in crypto.items() %}
+<li>{{ k }}: {{ v }}%</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>

@@ -1,23 +1,79 @@
-<h3>Geopolitics</h3>
-<ul>
-{% for item in news.geopolitics %}
-<li>{{ item }}</li>
-{% endfor %}
-</ul>
+<html>
+  <body style="margin:0;background:#0b1220;font-family:Arial;color:#e5e7eb">
 
-<h2>📊 Markets</h2>
-<ul>
-{% for k,v in markets.items() %}
-<li>{{ k }}: {{ v }}%</li>
-{% endfor %}
-</ul>
+    <!-- HEADER -->
+    <div style="padding:24px;background:#111827;text-align:center">
+      <h1 style="margin:0;color:white;letter-spacing:1px">
+        DAILY MARKET RECAP
+      </h1>
+      <p style="margin:6px 0 0;color:#9ca3af">
+        Automated Trading Intelligence
+      </p>
+    </div>
 
-<h2>₿ Crypto</h2>
-<ul>
-{% for k,v in crypto.items() %}
-<li>{{ k }}: {{ v }}%</li>
-{% endfor %}
-</ul>
+    <div style="padding:20px;max-width:700px;margin:auto">
 
-</body>
+      <!-- RISK -->
+      <div style="background:#1f2937;padding:16px;border-radius:12px;margin-bottom:16px">
+        <h2 style="margin:0 0 10px">🟢 Risk Sentiment</h2>
+        <p style="margin:0;color:#9ca3af">Market conditions stable / risk-on bias</p>
+      </div>
+
+      <!-- NEWS -->
+      <div style="background:#111827;padding:16px;border-radius:12px;margin-bottom:16px">
+        <h2>📰 Macro News</h2>
+
+        <h3>🏦 Fed / ECB</h3>
+        <ul>
+          {% for item in news.fed_ecb %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+
+        <h3>📉 Inflation / Rates</h3>
+        <ul>
+          {% for item in news.inflation_rates %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+
+        <h3>🌍 Geopolitics</h3>
+        <ul>
+          {% for item in news.geopolitics %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- MARKETS -->
+      <div style="background:#111827;padding:16px;border-radius:12px;margin-bottom:16px">
+        <h2>📊 Markets</h2>
+
+        {% for k,v in markets.items() %}
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1f2937">
+            <span>{{ k }}</span>
+            <span style="color:{% if v > 0 %}#22c55e{% else %}#ef4444{% endif %}">
+              {{ v }}%
+            </span>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- CRYPTO -->
+      <div style="background:#111827;padding:16px;border-radius:12px">
+        <h2>₿ Crypto</h2>
+
+        {% for k,v in crypto.items() %}
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1f2937">
+            <span>{{ k }}</span>
+            <span style="color:{% if v > 0 %}#22c55e{% else %}#ef4444{% endif %}">
+              {{ v }}%
+            </span>
+          </div>
+        {% endfor %}
+
+      </div>
+
+    </div>
+  </body>
 </html>

@@ -1,79 +1,138 @@
+<!DOCTYPE html>
 <html>
-  <body style="margin:0;background:#0b1220;font-family:Arial;color:#e5e7eb">
+<head>
+  <meta charset="utf-8">
+</head>
 
-    <!-- HEADER -->
-    <div style="padding:24px;background:#111827;text-align:center">
-      <h1 style="margin:0;color:white;letter-spacing:1px">
-        DAILY MARKET RECAP
-      </h1>
-      <p style="margin:6px 0 0;color:#9ca3af">
-        Automated Trading Intelligence
-      </p>
-    </div>
+<body style="margin:0;background:#ffffff;font-family:Arial;color:#111">
 
-    <div style="padding:20px;max-width:700px;margin:auto">
+<!-- HEADER -->
+<div style="
+  padding:24px;
+  text-align:center;
+  border-bottom:1px solid #000;
+">
+  <h1 style="margin:0;font-size:22px;letter-spacing:1px;">
+    DAILY MARKET RECAP
+  </h1>
+  <p style="margin:6px 0 0;font-size:12px;color:#666">
+    Automated Market Intelligence
+  </p>
+</div>
 
-      <!-- RISK -->
-      <div style="background:#1f2937;padding:16px;border-radius:12px;margin-bottom:16px">
-        <h2 style="margin:0 0 10px">🟢 Risk Sentiment</h2>
-        <p style="margin:0;color:#9ca3af">Market conditions stable / risk-on bias</p>
-      </div>
+<!-- CONTAINER -->
+<div style="max-width:1000px;margin:0 auto;padding:20px">
 
-      <!-- NEWS -->
-      <div style="background:#111827;padding:16px;border-radius:12px;margin-bottom:16px">
-        <h2>📰 Macro News</h2>
+  <!-- RISK -->
+  <div style="
+    background:#f5f5f5;
+    border:1px solid #000;
+    border-radius:6px;
+    padding:12px;
+    margin-bottom:16px;
+  ">
+    <h2 style="margin:0;font-size:16px;">🟢 Risk Sentiment</h2>
+    <p style="margin:6px 0 0;font-size:13px;color:#333">
+      Market conditions stable / risk-on bias
+    </p>
+  </div>
 
-        <h3>🏦 Fed / ECB</h3>
-        <ul>
+  <!-- MACRO NEWS -->
+  <div style="
+    background:#f5f5f5;
+    border:1px solid #000;
+    border-radius:6px;
+    padding:12px;
+    margin-bottom:16px;
+  ">
+    <h2 style="margin:0 0 10px;font-size:16px;">📰 Macro News</h2>
+
+    <div style="display:flex;gap:20px;flex-wrap:wrap">
+
+      <div style="flex:1;min-width:250px;">
+        <h3 style="font-size:14px;margin:0 0 6px;">Fed / ECB</h3>
+        <ul style="margin:0;padding-left:18px;font-size:13px;">
           {% for item in news.fed_ecb %}
           <li>{{ item }}</li>
           {% endfor %}
         </ul>
+      </div>
 
-        <h3>📉 Inflation / Rates</h3>
-        <ul>
+      <div style="flex:1;min-width:250px;">
+        <h3 style="font-size:14px;margin:0 0 6px;">Inflation / Rates</h3>
+        <ul style="margin:0;padding-left:18px;font-size:13px;">
           {% for item in news.inflation_rates %}
           <li>{{ item }}</li>
           {% endfor %}
         </ul>
+      </div>
 
-        <h3>🌍 Geopolitics</h3>
-        <ul>
+      <div style="flex:1;min-width:250px;">
+        <h3 style="font-size:14px;margin:0 0 6px;">Geopolitics</h3>
+        <ul style="margin:0;padding-left:18px;font-size:13px;">
           {% for item in news.geopolitics %}
           <li>{{ item }}</li>
           {% endfor %}
         </ul>
       </div>
 
-      <!-- MARKETS -->
-      <div style="background:#111827;padding:16px;border-radius:12px;margin-bottom:16px">
-        <h2>📊 Markets</h2>
-
-        {% for k,v in markets.items() %}
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1f2937">
-            <span>{{ k }}</span>
-            <span style="color:{% if v > 0 %}#22c55e{% else %}#ef4444{% endif %}">
-              {{ v }}%
-            </span>
-          </div>
-        {% endfor %}
-      </div>
-
-      <!-- CRYPTO -->
-      <div style="background:#111827;padding:16px;border-radius:12px">
-        <h2>₿ Crypto</h2>
-
-        {% for k,v in crypto.items() %}
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1f2937">
-            <span>{{ k }}</span>
-            <span style="color:{% if v > 0 %}#22c55e{% else %}#ef4444{% endif %}">
-              {{ v }}%
-            </span>
-          </div>
-        {% endfor %}
-
-      </div>
-
     </div>
-  </body>
+  </div>
+
+  <!-- MARKETS -->
+  <div style="
+    background:#f5f5f5;
+    border:1px solid #000;
+    border-radius:6px;
+    padding:12px;
+    margin-bottom:16px;
+  ">
+    <h2 style="margin:0 0 10px;font-size:16px;">📊 Markets</h2>
+
+    {% for k,v in markets.items() %}
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      padding:6px 0;
+      border-bottom:1px solid #ddd;
+      font-size:13px;
+    ">
+      <span>{{ k }}</span>
+      <span style="color:{% if v >= 0 %}green{% else %}red{% endif %}">
+        {{ v }}%
+      </span>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- CRYPTO -->
+  <div style="
+    background:#f5f5f5;
+    border:1px solid #000;
+    border-radius:6px;
+    padding:12px;
+  ">
+    <h2 style="margin:0 0 10px;font-size:16px;">₿ Crypto</h2>
+
+    {% for k,v in crypto.items() %}
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      padding:6px 0;
+      border-bottom:1px solid #ddd;
+      font-size:13px;
+    ">
+      <span>{{ k }}</span>
+      <span style="color:{% if v >= 0 %}green{% else %}red{% endif %}">
+        {{ v }}%
+      </span>
+    </div>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+</body>
 </html>

@@ -1,75 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
 </head>
 
-<body style="margin:0;background:#ffffff;font-family:Arial;color:#111">
+<body style="margin:0;background:#ffffff;font-family:Arial;color:#111;">
 
 <!-- HEADER -->
 <div style="
-  padding:24px;
+  background:#0f172a;
+  color:white;
+  padding:20px;
   text-align:center;
-  border-bottom:1px solid #000;
 ">
-  <h1 style="margin:0;font-size:22px;letter-spacing:1px;">
+  <div style="font-size:20px;font-weight:bold;letter-spacing:1px;">
     DAILY MARKET RECAP
-  </h1>
-  <p style="margin:6px 0 0;font-size:12px;color:#666">
-    Automated Market Intelligence
-  </p>
+  </div>
+  <div style="font-size:11px;color:#94a3b8;margin-top:4px;">
+    Prepared for you
+  </div>
 </div>
 
-<!-- CONTAINER -->
-<div style="max-width:1000px;margin:0 auto;padding:20px">
+<!-- MAIN CONTAINER -->
+<div style="max-width:1100px;margin:0 auto;padding:20px;">
 
-  <!-- RISK -->
+  <!-- SENTIMENT -->
   <div style="
-    background:#f5f5f5;
-    border:1px solid #000;
-    border-radius:6px;
+    border:1px solid #e5e7eb;
+    background:#f8fafc;
     padding:12px;
+    border-radius:8px;
     margin-bottom:16px;
   ">
-    <h2 style="margin:0;font-size:16px;">🟢 Risk Sentiment</h2>
-    <p style="margin:6px 0 0;font-size:13px;color:#333">
-      Market conditions stable / risk-on bias
-    </p>
+    <b>🟢 Risk-On</b>
+    <span style="color:#64748b;font-size:12px;margin-left:8px;">
+      Market shows confidence
+    </span>
   </div>
 
-  <!-- MACRO NEWS -->
-  <div style="
-    background:#f5f5f5;
-    border:1px solid #000;
-    border-radius:6px;
-    padding:12px;
-    margin-bottom:16px;
-  ">
-    <h2 style="margin:0 0 10px;font-size:16px;">📰 Macro News</h2>
+  <!-- 3 COLUMNS GRID -->
+  <div style="display:flex;gap:16px;">
 
-    <div style="display:flex;gap:20px;flex-wrap:wrap">
+    <!-- MACRO NEWS -->
+    <div style="flex:1;border:1px solid #e5e7eb;background:#fff;border-radius:8px;padding:12px;">
+      <h3 style="margin:0 0 10px;">📰 Macro News</h3>
 
-      <div style="flex:1;min-width:250px;">
-        <h3 style="font-size:14px;margin:0 0 6px;">Fed / ECB</h3>
-        <ul style="margin:0;padding-left:18px;font-size:13px;">
+      <div style="margin-bottom:10px;">
+        <b>Fed / ECB</b>
+        <ul style="padding-left:18px;font-size:12px;">
           {% for item in news.fed_ecb %}
           <li>{{ item }}</li>
           {% endfor %}
         </ul>
       </div>
 
-      <div style="flex:1;min-width:250px;">
-        <h3 style="font-size:14px;margin:0 0 6px;">Inflation / Rates</h3>
-        <ul style="margin:0;padding-left:18px;font-size:13px;">
+      <div style="margin-bottom:10px;">
+        <b>Inflation / Rates</b>
+        <ul style="padding-left:18px;font-size:12px;">
           {% for item in news.inflation_rates %}
           <li>{{ item }}</li>
           {% endfor %}
         </ul>
       </div>
 
-      <div style="flex:1;min-width:250px;">
-        <h3 style="font-size:14px;margin:0 0 6px;">Geopolitics</h3>
-        <ul style="margin:0;padding-left:18px;font-size:13px;">
+      <div>
+        <b>Geopolitics</b>
+        <ul style="padding-left:18px;font-size:12px;">
           {% for item in news.geopolitics %}
           <li>{{ item }}</li>
           {% endfor %}
@@ -77,58 +73,67 @@
       </div>
 
     </div>
+
+    <!-- MARKETS -->
+    <div style="flex:1;border:1px solid #e5e7eb;background:#fff;border-radius:8px;padding:12px;">
+      <h3 style="margin:0 0 10px;">📊 Global Markets</h3>
+
+      {% for k,v in markets.items() %}
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:6px 0;
+        border-bottom:1px solid #f1f5f9;
+        font-size:13px;
+      ">
+        <span>{{ k }}</span>
+        <span style="color:{% if v >= 0 %}#16a34a{% else %}#dc2626{% endif %};font-weight:bold;">
+          {{ v }}%
+        </span>
+      </div>
+      {% endfor %}
+
+    </div>
+
+    <!-- TOP MOVERS (CRYPTO TEMP HERE) -->
+    <div style="flex:1;border:1px solid #e5e7eb;background:#fff;border-radius:8px;padding:12px;">
+      <h3 style="margin:0 0 10px;">₿ Crypto</h3>
+
+      {% for k,v in crypto.items() %}
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:6px 0;
+        border-bottom:1px solid #f1f5f9;
+        font-size:13px;
+      ">
+        <span>{{ k }}</span>
+        <span style="color:{% if v >= 0 %}#16a34a{% else %}#dc2626{% endif %};font-weight:bold;">
+          {{ v }}%
+        </span>
+      </div>
+      {% endfor %}
+
+    </div>
+
   </div>
 
-  <!-- MARKETS -->
-  <div style="
-    background:#f5f5f5;
-    border:1px solid #000;
-    border-radius:6px;
-    padding:12px;
-    margin-bottom:16px;
-  ">
-    <h2 style="margin:0 0 10px;font-size:16px;">📊 Markets</h2>
+  <!-- BOTTOM ROW (OPTIONAL LIKE SCREEN) -->
+  <div style="display:flex;gap:16px;margin-top:16px;">
 
-    {% for k,v in markets.items() %}
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      padding:6px 0;
-      border-bottom:1px solid #ddd;
-      font-size:13px;
-    ">
-      <span>{{ k }}</span>
-      <span style="color:{% if v >= 0 %}green{% else %}red{% endif %}">
-        {{ v }}%
-      </span>
+    <div style="flex:1;border:1px solid #e5e7eb;background:#fff;border-radius:8px;padding:12px;">
+      <h3 style="margin:0 0 10px;">🏭 Sectors</h3>
+      <div style="font-size:12px;color:#64748b;">
+        Tech / Health / Finance / Energy
+      </div>
     </div>
-    {% endfor %}
 
-  </div>
-
-  <!-- CRYPTO -->
-  <div style="
-    background:#f5f5f5;
-    border:1px solid #000;
-    border-radius:6px;
-    padding:12px;
-  ">
-    <h2 style="margin:0 0 10px;font-size:16px;">₿ Crypto</h2>
-
-    {% for k,v in crypto.items() %}
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      padding:6px 0;
-      border-bottom:1px solid #ddd;
-      font-size:13px;
-    ">
-      <span>{{ k }}</span>
-      <span style="color:{% if v >= 0 %}green{% else %}red{% endif %}">
-        {{ v }}%
-      </span>
+    <div style="flex:1;border:1px solid #e5e7eb;background:#fff;border-radius:8px;padding:12px;">
+      <h3 style="margin:0 0 10px;">🚀 Themes</h3>
+      <div style="font-size:12px;color:#64748b;">
+        AI / Semiconductors / Cybersecurity
+      </div>
     </div>
-    {% endfor %}
 
   </div>
 
